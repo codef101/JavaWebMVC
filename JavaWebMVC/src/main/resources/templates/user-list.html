@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
+          integrity="sha512-b2QcS5SsA8tZodcDtGRELiGv5SaKSk1vDHDaQRda0htPYWZ6046lr3kJ5bAAQdpV2mmA/4v0wQF9MyU6/pDIAg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+<body class="min-vh-100">
+<div class="col-12 col-md-6 mx-auto p-4">
+
+<div class="container-sm mt-5">
+    <nav class="mb-5 navbar navbar-expand-sm navbar-dark bg-secondary rounded">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Home</a>
+            <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarID"
+                    aria-controls="navbarID"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarID">
+                <div class="navbar-nav">
+                    <a class="nav-link" aria-current="page" href="/user-list"
+                    >User List</a
+                    >
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="mt-3">
+        <p>Page Hits: <span th:text="${pageHits}">0</span></p>
+    </div>
+
+    <!-- Search Form -->
+    <form th:action="@{/user-list}" method="get">
+        <div class="mb-3">
+            <label for="search" class="form-label">Search:</label>
+            <input type="text" class="form-control" id="search" name="search" placeholder="Enter name to search">
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <!-- Display the list of users -->
+    <h2>User List</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iterate over the filtered user list and display each user -->
+        <tr th:each="user : ${userList}">
+            <td th:text="${user.id}">1</td>
+            <td th:text="${user.name}">John Doe</td>
+            <td th:text="${user.email}">john.doe@example.com</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+<!-- Include Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"
+        integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</body>
+</html>
